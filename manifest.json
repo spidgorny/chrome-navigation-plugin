@@ -1,6 +1,6 @@
 {
   "name" : "Navigation Shortcuts",
-  "version" : "8.1",
+  "version" : "8.2",
   "manifest_version": 2,
   "description" : "Allows next, up, prev, and top links to be used with simple keyboard shortcuts.",
   "permissions" : [ "history" ],
@@ -12,7 +12,7 @@
       ],
       "js" : ["content_script.js"],
       "run_at" : "document_end",
-      "all_frames" : false
+      "all_frames" : true
     }
   ],
   "browser_action": {

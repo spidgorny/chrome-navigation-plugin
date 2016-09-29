@@ -127,19 +127,21 @@ function populateDestinations(){
 				for(var i in links){
 					var text = links[i].innerText.trim();
 					var className = links[i].className.trim();
+					var title = links[i].title.trim();
 					if(
 						links[i].href
-						&& (text.match(regexes[r]) || className.match(regexes[r]))
+						&& (text.match(regexes[r])
+						|| className.match(regexes[r])
+						|| title.match(regexes[r])
+						)
 					){
 						destinations[dest] = links[i].href;
 						targets[dest] = links[i];
-						//console.log(dest, 'class='+className, '['+text+']', regexes[r], targets[dest]);
+						console.log(dest,
+						'class='+className,
+						'title='+title, '['+text+']',
+						regexes[r], targets[dest]);
 						return;	// this is a fancy break?
-					} else {
-
-						if (dest == 'next' && r == 7) {
-							//console.log('!', dest, 'class=' + className, '[' + text + ']', regexes[r]);
-						}
 					}
 				}
 			}
@@ -208,6 +210,8 @@ function keyListener(e){
 	e.preventDefault();
 
 	//Navigate or click the link
+	console.log(targets[action]);
+	console.log(destinations[action]);
 	if(targets[action]){
 		targets[action].click();
 	}else{
@@ -217,10 +221,10 @@ function keyListener(e){
 }
 
 //The key listening event should only be bound to the top window
-if (window == top) {
+// if (window == top) {
 	document.addEventListener('DOMSubtreeModified', resetDestinations);
 	window.addEventListener('keydown', keyListener, false);
-}
+// }
 
 //Initial population
 resetDestinations();
